@@ -1,0 +1,60 @@
+var horsepositions = [{ x: 4, y: 4 }, { x: 5, y: 3 }];
+
+var queenpositions = [{ x: 3, y: 2 }];
+var isQueenDead;
+function checkDead() {
+  Loop1: for (let i = 0; i < horsepositions.length; i++) {
+    if (isQueenDead && isQueenDead == 'dead') {
+      console.log(isQueenDead + 'isQueenDead1');
+      break;
+    } else {
+      isQueenDead = calculateCoordinates(
+        horsepositions[i].x,
+        horsepositions[i].y
+      );
+    }
+  }
+  return isQueenDead;
+}
+
+function calculateCoordinates(x, y) {
+  const arr = [
+    { x: x - 1, y: y - 2 },
+    { x: x + 1, y: y - 2 },
+    { x: x - 1, y: y + 2 },
+    { x: x + 1, y: y + 2 },
+    { x: x - 2, y: y - 1 },
+    { x: x + 2, y: y - 1 },
+    { x: x - 2, y: y + 1 },
+    { x: x + 2, y: y + 1 },
+  ];
+  return filterCoordinates(arr);
+}
+
+function filterCoordinates(arr) {
+  const newArr = arr.filter((data, index) => {
+    return data.x <= 8 && data.x >= 1 && data.y <= 8 && data.y >= 1;
+  });
+  return isDead(newArr);
+}
+
+function isDead(arr) {
+  let data = 'alive';
+  for (let i = 0; i < arr.length; i++) {
+    console.log(
+      arr[i].x +
+        ' ' +
+        arr[i].y +
+        ' ' +
+        queenpositions[0].x +
+        ' ' +
+        queenpositions[0].y
+    );
+    if (arr[i].x == queenpositions[0].x && arr[i].y == queenpositions[0].y) {
+      data = 'dead';
+      break;
+    }
+  }
+  return data;
+}
+checkDead();
